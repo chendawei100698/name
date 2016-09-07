@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin:0; padding:0; text-decoration: none;}
+	#box{ width:400px; height:300px; border:1px solid #000; border-radius:20px; background:#ebebeb; margin:100px auto; overflow:hidden; text-align:center; -webkit-transform:scale(5,5); opacity:0; display:none;}
+	#close{font-size: 50px; line-height: 300px; text-align: center;}
+	</style>
+	<script>
+	window.onload=function(){
+		var oBtn = document.getElementById('btn');
+		var oBox = document.getElementById('box');
+		var oClose = document.getElementById('close');
+		oBtn.onclick=function(){
+			oBox.style.display='block';
+
+			oBox.style.WebkitTransition = '.3s all ease';
+
+			setTimeout(function(){
+				oBox.style.opacity = 1;
+				oBox.style.WebkitTransform = 'scale(1,1)';
+			},0);
+		};
+
+		oClose.onclick=function(){
+			oBox.style.WebkitTransform = 'scale(5,5)';
+			oBox.style.opacity = 0;
+
+			function tranEnd(){
+				oBox.removeEventListener('transitionend',tranEnd,false);
+				oBox.style.display='none';
+			}
+
+			oBox.addEventListener('transitionend',tranEnd,false);
+
+
+		};
+	};
+	</script>
+</head>
+<body>
+	<a href="javascript:;" id="btn">登录</a>
+	<div id="box">
+		<a href="javascript:;" id="close">×</a>
+	</div>
+</body>
+</html>
